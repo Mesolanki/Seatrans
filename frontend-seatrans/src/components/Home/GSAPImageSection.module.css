@@ -1,0 +1,276 @@
+.section {
+  padding: 20px 24px 60px 24px;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  position: relative;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* Ambient Background Glow Blobs */
+.glowBlob1 {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  top: -150px;
+  left: -150px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(56, 189, 248, 0) 70%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glowBlob2 {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  bottom: -200px;
+  right: -150px;
+  background: radial-gradient(circle, rgba(30, 101, 179, 0.06) 0%, rgba(30, 101, 179, 0) 70%);
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.layoutWrapper {
+  display: flex;
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.colLeft, .colRight {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  height: 100%;
+}
+
+/* Landing zone placeholder wrapper (keeps layout alignment) */
+.landingZone {
+  width: 100%;
+  max-width: 480px;
+  height: 310px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+
+/* Slide Right Box (Dashed target on Right - starts hidden/faded) */
+.slideRightBox {
+  position: absolute;
+  opacity: 0.15;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+/* Content column layout */
+.contentCol {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all var(--transition-normal);
+}
+
+/* Slide Left Content (Left text - starts hidden/offset) */
+.slideLeftContent {
+  position: absolute;
+  opacity: 0;
+  transform: translateX(-50px);
+  pointer-events: none;
+}
+
+.subtitle {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brand-blue);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+
+/* Sizing and custom-gradient typography */
+.title {
+  font-size: 44px;
+  font-weight: 800;
+  color: var(--brand-navy);
+  line-height: 1.12;
+  margin-bottom: 12px;
+  letter-spacing: -1.5px;
+}
+
+.highlightText {
+  background: linear-gradient(135deg, var(--brand-blue) 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.divider {
+  width: 60px;
+  height: 4px;
+  background-color: var(--brand-blue);
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.description {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.featuresList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.featureItem {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  cursor: default;
+}
+
+/* Glow-up feature bullets on hover */
+.featureBullet {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--brand-blue-light);
+  color: var(--brand-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 6px rgba(30, 101, 179, 0.05);
+}
+
+.featureItem:hover .featureBullet {
+  background-color: var(--brand-blue);
+  color: #ffffff;
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(30, 101, 179, 0.25);
+}
+
+.bulletIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.featureTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--brand-navy);
+  margin-bottom: 4px;
+}
+
+.featureText {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Animated Floating Cargo Container (slides left to right) */
+.animatedCargo {
+  position: absolute;
+  top: 50%;
+  width: calc(min(480px, 50% - 20px) * 0.95);
+  height: auto;
+  z-index: 10;
+  pointer-events: none;
+  display: block;
+}
+
+/* Soft Dynamic radial shadow beneath the cargo image */
+.cargoShadow {
+  position: absolute;
+  top: 72%; /* Adjusted from 66% to keep shadow below the taller scaled container */
+  width: calc(min(480px, 50% - 20px) * 0.80);
+  height: 26px;
+  background: radial-gradient(ellipse at center, rgba(6, 17, 32, 0.35) 0%, rgba(6, 17, 32, 0) 70%);
+  z-index: 9;
+  pointer-events: none;
+  display: block;
+}
+
+/* Static mobile fallback styling */
+.staticCargoMobile {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .section {
+    height: auto;
+    padding: 60px 24px;
+  }
+  .layoutWrapper {
+    flex-direction: column;
+    gap: 40px;
+    min-height: auto;
+  }
+  .colLeft, .colRight {
+    min-height: auto;
+    width: 100%;
+  }
+  .landingZone {
+    max-width: 400px;
+    height: 260px;
+  }
+  .animatedCargo, .cargoShadow {
+    display: none;
+  }
+  .slideRightBox {
+    position: relative;
+    opacity: 1;
+    transform: scale(1);
+    margin-bottom: 24px;
+  }
+  .slideLeftContent {
+    position: relative;
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+  .staticCargoMobile {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+  }
+  .contentCol {
+    align-items: center;
+    text-align: center;
+  }
+  .divider {
+    margin: 0 auto 24px auto;
+  }
+  .title {
+    font-size: 32px;
+  }
+}

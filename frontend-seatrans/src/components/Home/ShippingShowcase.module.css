@@ -1,0 +1,864 @@
+/* ═══════════════════════════════════════════════════════════
+   SHIPPING SHOWCASE — DYNAMIC SIMULATOR SECTION
+   Ocean Freight • Crane Loading • Storm Systems • Telemetry
+   ═══════════════════════════════════════════════════════════ */
+
+.section {
+  position: relative;
+  background: linear-gradient(180deg, #f8fafc 0%, #cbd5e1 100%);
+  padding: 80px 24px;
+  overflow: hidden;
+  isolation: isolate;
+  transition: background 1.2s ease, color 1.2s ease;
+}
+
+.stormTheme {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+}
+
+.lightningOverlay {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  opacity: 0;
+  z-index: 5;
+  pointer-events: none;
+  mix-blend-mode: color-dodge;
+  transition: opacity 0.05s ease;
+}
+
+.flashActive {
+  animation: lightningFlash 0.35s ease-out;
+}
+
+@keyframes lightningFlash {
+  0% { opacity: 0; }
+  10% { opacity: 0.85; }
+  15% { opacity: 0.1; }
+  25% { opacity: 0.95; }
+  35% { opacity: 0.05; }
+  100% { opacity: 0; }
+}
+
+.container {
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 48px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brand-blue, #1e65b3);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.heading {
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 800;
+  color: var(--brand-navy, #0c2340);
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  transition: color 1.2s ease;
+}
+
+.stormTheme .heading {
+  color: #ffffff;
+}
+
+.accent {
+  color: var(--brand-blue, #1e65b3);
+}
+
+.subText {
+  font-size: 15px;
+  color: var(--text-secondary, #475569);
+  line-height: 1.6;
+  margin: 0;
+  transition: color 1.2s ease;
+}
+
+.stormTheme .subText {
+  color: #cbd5e1;
+}
+
+.highlightText {
+  color: var(--brand-navy, #0c2340);
+  font-weight: 700;
+  transition: color 1.2s ease;
+}
+
+.stormTheme .highlightText {
+  color: var(--brand-blue, #1e65b3);
+}
+
+/* ── Simulator Grid Layout ── */
+.grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* ── Left Column: Dashboard ── */
+.dashboardCard {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 20px 40px rgba(12, 35, 64, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 1.2s ease;
+  z-index: 12;
+}
+
+.stormTheme .dashboardCard {
+  background: rgba(15, 23, 42, 0.7);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.glassHeader {
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(12, 35, 64, 0.08);
+  padding-bottom: 16px;
+  transition: border-color 1.2s ease;
+}
+
+.stormTheme .glassHeader {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.liveIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.radarPing {
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  position: relative;
+}
+
+.radarPing::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid #22c55e;
+  animation: ping 1.8s ease-in-out infinite;
+}
+
+@keyframes ping {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.liveText {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #22c55e;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--brand-navy, #0c2340);
+  margin: 0;
+  transition: color 1.2s ease;
+}
+
+.stormTheme .cardTitle {
+  color: #ffffff;
+}
+
+/* Telemetry lists */
+.telemetryGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.telemetryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+  border: 1px solid rgba(12, 35, 64, 0.04);
+  transition: all 1.2s ease;
+}
+
+.stormTheme .telemetryItem {
+  background: rgba(30, 41, 59, 0.45);
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+.telLabel {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.5px;
+}
+
+.telVal {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brand-navy, #0c2340);
+  transition: color 1.2s ease;
+}
+
+.stormTheme .telVal {
+  color: #f1f5f9;
+}
+
+.mooredStatus {
+  color: var(--brand-blue, #1e65b3);
+}
+
+.cruisingStatus {
+  color: #22c55e;
+  font-weight: 800;
+}
+
+.clearText {
+  color: #f59e0b;
+}
+
+.stormText {
+  color: #38bdf8;
+  font-weight: 800;
+}
+
+/* Console Buttons */
+.actionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.consoleBtn {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--brand-navy, #0c2340);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 13px;
+  border-radius: 6px;
+  border: 1px solid rgba(12, 35, 64, 0.12);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+}
+
+.stormTheme .consoleBtn {
+  background: rgba(30, 41, 59, 0.8);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.consoleBtn:hover {
+  background: var(--brand-blue, #1e65b3);
+  color: #ffffff;
+  border-color: var(--brand-blue, #1e65b3);
+}
+
+.consoleBtn.btnActive {
+  background: var(--brand-blue, #1e65b3);
+  color: #ffffff;
+  border-color: var(--brand-blue, #1e65b3);
+  box-shadow: 0 4px 12px rgba(30, 101, 179, 0.3);
+}
+
+.consoleBtn.btnActiveAlert {
+  background: #f43f5e;
+  color: #ffffff;
+  border-color: #f43f5e;
+  box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
+  font-weight: 800;
+}
+
+.consoleBtn.btnActiveAlert:hover {
+  background: #e11d48;
+  border-color: #e11d48;
+}
+
+
+/* ── Right Column: Simulator Graphic ── */
+.simulationWindow {
+  /* Premium coastal maritime dusk gradient */
+  background: linear-gradient(180deg, #0c2340 0%, #1a365d 40%, #2a4365 70%, #63b3ed 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(12, 35, 64, 0.15);
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 30px 60px rgba(12, 35, 64, 0.18);
+  transition: background 1.2s ease, border-color 1.2s ease;
+}
+
+.stormTheme .simulationWindow {
+  background: linear-gradient(180deg, #020617 0%, #0f172a 60%, #1e293b 100%);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Scenery Backdrop */
+.sceneryBackdrop {
+  position: absolute;
+  inset: 0 0 40px 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.scenerySvg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  overflow: visible;
+}
+
+
+/* ── Environment: Skies ── */
+.skyEnvironment {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.sun {
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  width: 54px;
+  height: 54px;
+  background: radial-gradient(circle, #ffe082 0%, #ff8f00 60%, #e65100 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 45px rgba(255, 143, 0, 0.65);
+  animation: pulseSun 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulseSun {
+  0% { transform: scale(1); box-shadow: 0 0 35px rgba(255, 143, 0, 0.5); }
+  100% { transform: scale(1.08); box-shadow: 0 0 60px rgba(255, 143, 0, 0.85); }
+}
+
+.moon {
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  width: 40px;
+  height: 40px;
+  background: #f8fafc;
+  border-radius: 50%;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+}
+
+/* Clouds animation */
+.cloud, .stormCloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  height: 10px;
+  will-change: transform;
+}
+
+.cloud1 {
+  top: 24px;
+  left: 20px;
+  width: 80px;
+  animation: floatCloud 30s linear infinite;
+  opacity: 0.4;
+}
+
+.cloud2 {
+  top: 50px;
+  left: 140px;
+  width: 120px;
+  animation: floatCloud 45s linear infinite;
+  animation-delay: -10s;
+  opacity: 0.25;
+}
+
+.cloud3 {
+  top: 76px;
+  left: -40px;
+  width: 60px;
+  animation: floatCloud 24s linear infinite;
+  animation-delay: -5s;
+  opacity: 0.15;
+}
+
+.stormCloud {
+  background: rgba(47, 55, 75, 0.7);
+  height: 20px;
+}
+
+.stormCloud1 {
+  top: 20px;
+  left: -20px;
+  width: 180px;
+  animation: floatCloud 18s linear infinite;
+}
+
+.stormCloud2 {
+  top: 46px;
+  left: 100px;
+  width: 240px;
+  animation: floatCloud 25s linear infinite;
+  animation-delay: -6s;
+  opacity: 0.8;
+}
+
+@keyframes floatCloud {
+  0% { transform: translateX(-240px); }
+  100% { transform: translateX(650px); }
+}
+
+
+/* ── Concrete Dock Platform ── */
+.harborDock {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 140px;
+  height: 90px;
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.dockConcrete {
+  background: #334155;
+  width: 100%;
+  height: 35px;
+  position: relative;
+  border-top: 4px solid #1e293b;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dockSafetyStripe {
+  width: 100%;
+  height: 4px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #eab308 0px,
+    #eab308 10px,
+    #1e293b 10px,
+    #1e293b 20px
+  );
+  position: absolute;
+  top: 0;
+}
+
+.bollard {
+  position: absolute;
+  top: -12px;
+  left: 25px;
+  width: 10px;
+  height: 10px;
+  background: #0f172a;
+  border-radius: 4px 4px 0 0;
+  border-bottom: 2px solid #334155;
+}
+
+.bollard::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -2px;
+  width: 14px;
+  height: 5px;
+  background: #0f172a;
+  border-radius: 4px;
+}
+
+
+/* ── Port Crane Structure ── */
+.harborCrane {
+  position: absolute;
+  bottom: 31px; /* Rests perfectly on the concrete dock top */
+  left: 20px;
+  width: 180px;
+  height: 180px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.craneSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Crane actions */
+.craneTrolley {
+  transform: translateX(0);
+  transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.craneCargoBox {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1) 1.8s, opacity 0.5s ease 3s;
+}
+
+.cableLine {
+  y2: 90px;
+  transition: y2 1.2s cubic-bezier(0.25, 1, 0.5, 1) 1.8s;
+}
+
+/* State when cargo is loaded */
+.craneLoadedState .craneTrolley {
+  transform: translateX(52px);
+}
+
+.craneLoadedState .craneCargoBox {
+  transform: translateY(32px); /* Matches stack position */
+  opacity: 0;
+}
+
+.craneLoadedState .cableLine {
+  y2: 122px;
+}
+
+
+/* ── Container Ship Frame ── */
+.vesselFrame {
+  position: absolute;
+  bottom: 0px;
+  right: -25px;
+  width: 390px;
+  height: 155px;
+  z-index: 5;
+  pointer-events: none;
+  animation: shipSlightBob 4.8s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.shipSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Storm state bobbing */
+.vesselStormy {
+  animation: shipHeavyStormBob 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes shipSlightBob {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(2px) rotate(0.4deg); }
+  100% { transform: translateY(-1.5px) rotate(-0.3deg); }
+}
+
+@keyframes shipHeavyStormBob {
+  0% { transform: translateY(-4px) rotate(-1.5deg); }
+  50% { transform: translateY(5px) rotate(2deg); }
+  100% { transform: translateY(-2.5px) rotate(-1.2deg); }
+}
+
+/* Vessel running movement */
+.vesselRunning {
+  animation: shipEngineVibe 0.16s linear infinite, shipSlightBob 4.8s ease-in-out infinite alternate;
+}
+
+.vesselRunning.vesselStormy {
+  animation: shipEngineVibe 0.1s linear infinite, shipHeavyStormBob 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes shipEngineVibe {
+  0% { transform: translateY(0.3px) scaleY(0.998); }
+  50% { transform: translateY(-0.2px) scaleY(1.002); }
+  100% { transform: translateY(0.1px) scaleY(1); }
+}
+
+/* Radar scanner rotating */
+.shipRadarScanner {
+  transform-origin: 327px 36px;
+  animation: radarSpin 2.2s linear infinite;
+}
+
+@keyframes radarSpin {
+  0% { transform: scaleX(1); }
+  25% { transform: scaleX(0.1); }
+  50% { transform: scaleX(-1); }
+  75% { transform: scaleX(-0.1); }
+  100% { transform: scaleX(1); }
+}
+
+/* Flashing warning mast lights */
+.mastLightRed {
+  animation: mastFlash 1.2s steps(2, start) infinite;
+}
+
+.mastLightGreen {
+  animation: mastFlash 1.6s steps(2, start) infinite;
+  animation-delay: 0.4s;
+}
+
+@keyframes mastFlash {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+
+/* Cargo Containers opacity loading */
+.vesselCargoStack {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.5s ease 2.9s, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 2.9s;
+}
+
+.vesselCargoStack.cargoVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Propeller spinning & bubbles */
+.shipPropeller {
+  transform-origin: 376px 115px;
+  transition: transform 0.5s ease;
+}
+
+.vesselRunning .shipPropeller {
+  animation: propellerSpin 0.25s linear infinite;
+}
+
+@keyframes propellerSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Exhaust pipe smoke */
+.smokePuff {
+  opacity: 0;
+  transform: scale(0.6) translate(0, 0);
+  transform-origin: 338px 40px;
+}
+
+.vesselRunning .puff1 {
+  animation: smokeRise 1.8s ease-out infinite;
+}
+.vesselRunning .puff2 {
+  animation: smokeRise 1.8s ease-out infinite;
+  animation-delay: 0.6s;
+}
+.vesselRunning .puff3 {
+  animation: smokeRise 1.8s ease-out infinite;
+  animation-delay: 1.2s;
+}
+
+@keyframes smokeRise {
+  0% { transform: scale(0.6) translate(0, 0); opacity: 0; }
+  15% { opacity: 0.6; }
+  100% { transform: scale(2.4) translate(-32px, -52px); opacity: 0; }
+}
+
+/* Hull Bubbles */
+.hullBubbles {
+  opacity: 0;
+}
+
+.vesselRunning .hullBubbles {
+  opacity: 1;
+}
+
+.vesselRunning .b1 { animation: bubbleDrift 1.2s linear infinite; }
+.vesselRunning .b2 { animation: bubbleDrift 1s linear infinite; animation-delay: 0.3s; }
+.vesselRunning .b3 { animation: bubbleDrift 1.4s linear infinite; animation-delay: 0.6s; }
+.vesselRunning .b4 { animation: bubbleDrift 0.8s linear infinite; animation-delay: 0.9s; }
+
+@keyframes bubbleDrift {
+  0% { transform: translate(0, 0) scale(0.8); opacity: 0.8; }
+  100% { transform: translate(36px, 4px) scale(1.4); opacity: 0; }
+}
+
+
+/* ── Sea & Parallax waves ── */
+.seaEnvironment {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.wave {
+  position: absolute;
+  left: -200px;
+  right: -200px;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  will-change: transform;
+}
+
+/* Wave 1: Back Wave */
+.waveBack {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' fill='%231d4ed8' opacity='0.35'%3E%3Cpath d='M0 20 C150 12 150 28 300 20 C450 12 450 28 600 20 C750 12 750 28 900 20 C1050 12 1050 28 1200 20 L1200 40 L0 40 Z'/%3E%3C/svg%3E");
+  bottom: 8px;
+  animation: waveParallax 12s linear infinite;
+  z-index: 1;
+}
+
+/* Wave 2: Mid Wave */
+.waveMid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' fill='%231e40af' opacity='0.65'%3E%3Cpath d='M0 20 C150 28 150 12 300 20 C450 28 450 12 600 20 C750 28 750 12 900 20 C1050 28 1050 12 1200 20 L1200 40 L0 40 Z'/%3E%3C/svg%3E");
+  bottom: 4px;
+  animation: waveParallax 8s linear infinite reverse;
+  z-index: 2;
+}
+
+/* Wave 3: Front Wave */
+.waveFront {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' fill='%231a365d'%3E%3Cpath d='M0 20 C150 15 150 25 300 20 C450 15 450 25 600 20 C750 15 750 25 900 20 C1050 15 1050 25 1200 20 L1200 40 L0 40 Z'/%3E%3C/svg%3E");
+  bottom: 0;
+  animation: waveParallax 5s linear infinite;
+  z-index: 3;
+}
+
+/* Stormy Wave colors */
+.stormTheme .waveBack {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' fill='%231e293b' opacity='0.3'%3E%3Cpath d='M0 20 C150 10 150 30 300 20 C450 10 450 30 600 20 C750 10 750 30 900 20 C1050 10 1050 30 1200 20 L1200 40 L0 40 Z'/%3E%3C/svg%3E");
+  animation-duration: 6s;
+}
+
+.stormTheme .waveMid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' fill='%230f172a' opacity='0.6'%3E%3Cpath d='M0 20 C150 30 150 10 300 20 C450 30 450 10 600 20 C750 30 750 10 900 20 C1050 30 1050 10 1200 20 L1200 40 L0 40 Z'/%3E%3C/svg%3E");
+  animation-duration: 4s;
+}
+
+.stormTheme .waveFront {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' fill='%230b0f19'%3E%3Cpath d='M0 20 C150 10 150 30 300 20 C450 10 450 30 600 20 C750 10 750 30 900 20 C1050 10 1050 30 1200 20 L1200 40 L0 40 Z'/%3E%3C/svg%3E");
+  animation-duration: 2.5s;
+}
+
+@keyframes waveParallax {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-200px); }
+}
+
+
+/* ── Storm Rain Particles overlay ── */
+.rainSystem {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.rainDrop1, .rainDrop2, .rainDrop3, .rainDrop4 {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  background-size: 200px 300px;
+  animation: rainFall 0.8s linear infinite;
+  will-change: transform;
+}
+
+.rainDrop1 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 150' fill='none'%3E%3Cline x1='30' y1='10' x2='20' y2='40' stroke='rgba%28255,255,255,0.25%29' stroke-width='0.8'/%3E%3Cline x1='70' y1='80' x2='60' y2='110' stroke='rgba%28255,255,255,0.25%29' stroke-width='0.8'/%3E%3C/svg%3E");
+  animation-duration: 0.7s;
+}
+
+.rainDrop2 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 150' fill='none'%3E%3Cline x1='10' y1='60' x2='0' y2='90' stroke='rgba%28255,255,255,0.18%29' stroke-width='0.6'/%3E%3Cline x1='80' y1='10' x2='70' y2='40' stroke='rgba%28255,255,255,0.18%29' stroke-width='0.6'/%3E%3C/svg%3E");
+  animation-duration: 0.9s;
+  animation-delay: -0.2s;
+  opacity: 0.85;
+}
+
+.rainDrop3 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 150' fill='none'%3E%3Cline x1='50' y1='20' x2='42' y2='45' stroke='rgba%2830,101,179,0.3%29' stroke-width='0.5'/%3E%3Cline x1='90' y1='100' x2='82' y2='125' stroke='rgba%2830,101,179,0.3%29' stroke-width='0.5'/%3E%3C/svg%3E");
+  animation-duration: 1.1s;
+  animation-delay: -0.4s;
+  opacity: 0.6;
+}
+
+.rainDrop4 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 150' fill='none'%3E%3Cline x1='40' y1='90' x2='28' y2='125' stroke='rgba%28255,255,255,0.35%29' stroke-width='1.2'/%3E%3C/svg%3E");
+  animation-duration: 0.6s;
+  animation-delay: -0.1s;
+}
+
+@keyframes rainFall {
+  0% { transform: translate(40px, -150px); }
+  100% { transform: translate(-40px, 300px); }
+}
+
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ═══════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .dashboardCard {
+    order: 2;
+  }
+
+  .simulationWindow {
+    order: 1;
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 60px 16px;
+  }
+
+  .simulationWindow {
+    min-height: 280px;
+  }
+
+  .harborCrane {
+    left: 10px;
+    width: 120px;
+    height: 120px;
+    bottom: 28px;
+  }
+
+  .vesselFrame {
+    width: 290px;
+    height: 115px;
+    right: -15px;
+  }
+}

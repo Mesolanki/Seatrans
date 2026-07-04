@@ -1,0 +1,143 @@
+.section {
+  padding: 60px 24px;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+}
+
+.container {
+  width: 100%;
+}
+
+.header {
+  max-width: 650px;
+  margin: 0 auto 48px auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subtitle {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brand-blue);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--brand-navy);
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.divider {
+  width: 60px;
+  height: 4px;
+  background-color: var(--brand-blue);
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+.leadText {
+  font-size: 15.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 3x2 Card Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 4px 12px rgba(12, 35, 64, 0.01);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(12, 35, 64, 0.06);
+  border-color: rgba(30, 101, 179, 0.15);
+}
+
+.iconWrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background-color: var(--brand-blue-light);
+  color: var(--brand-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .iconWrapper {
+  background-color: var(--brand-blue);
+  color: #ffffff;
+  transform: scale(1.05) rotate(3deg);
+}
+
+.industryIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.cardTitle {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--brand-navy);
+  margin-bottom: 10px;
+  letter-spacing: -0.3px;
+}
+
+.cardDescription {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* Responsive Overrides */
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .title {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 20px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .title {
+    font-size: 28px;
+    letter-spacing: -0.5px;
+  }
+  .card {
+    padding: 24px;
+  }
+}
