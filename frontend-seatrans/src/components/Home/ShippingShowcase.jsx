@@ -17,16 +17,17 @@ export default function ShippingShowcase() {
 
   // Lightning frequency in storm mode
   useEffect(() => {
-    if (!isStormy) {
-      setLightningFlash(false);
-      return;
-    }
+    if (!isStormy) return;
+
     const interval = setInterval(() => {
       setLightningFlash(true);
       setTimeout(() => setLightningFlash(false), 250);
     }, 4500);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      setLightningFlash(false);
+    };
   }, [isStormy]);
 
   // Smooth telemetry transitions

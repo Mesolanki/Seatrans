@@ -1,10 +1,11 @@
 .hero {
   position: relative;
-  min-height: 100vh;
+  height: 72vh;
+  min-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 140px 24px 80px 24px;
+  padding: 90px 24px 125px 24px;
   overflow: hidden;
   background-color: var(--brand-navy-dark);
 }
@@ -33,7 +34,7 @@
   inset: 0;
   background: radial-gradient(
     circle at center,
-    rgba(6, 17, 32, 0.35) 0%,
+    rgba(6, 17, 32, 0.3) 0%,
     rgba(6, 17, 32, 0.75) 100%
   );
   z-index: 1;
@@ -48,7 +49,7 @@
   height: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 160px 80px 100px 80px;
+  padding: 100px 80px 125px 80px; /* Shift content slightly up */
   display: flex;
   align-items: center; /* Centered vertically */
   justify-content: flex-start; /* Align content to the left */
@@ -81,12 +82,12 @@
 }
 
 .title {
-  font-size: 64px;
+  font-size: 60px;
   font-weight: 800;
   color: #ffffff;
   line-height: 1.1;
   letter-spacing: -2px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   text-shadow: 0 4px 20px rgba(6, 17, 32, 0.7);
   font-family: var(--font-sans);
 }
@@ -97,11 +98,11 @@
 }
 
 .description {
-  font-size: 19px;
+  font-size: 18.5px;
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.7;
   max-width: 580px;
-  margin-bottom: 36px;
+  margin-bottom: 32px;
   text-shadow: 0 2px 10px rgba(6, 17, 32, 0.6);
   font-family: var(--font-sans);
 }
@@ -194,8 +195,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: #ffffff;
   width: 56px;
   height: 56px;
@@ -210,8 +211,8 @@
 }
 
 .sliderArrow:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-50%) scale(1.08);
 }
 
@@ -228,43 +229,149 @@
   height: 24px;
 }
 
-/* Dot Indicators */
-.sliderDots {
+/* Modern Flow Step Navigation Panel */
+.flowNav {
   position: absolute;
-  bottom: 40px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
-  gap: 12px;
+  width: 100%;
+  max-width: var(--max-width);
+  padding: 0 80px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   z-index: 10;
+  box-sizing: border-box;
 }
 
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
-  border: none;
+.flowNavItem {
+  background: rgba(6, 17, 32, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 18px 24px;
+  border-radius: 14px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 16px;
   cursor: pointer;
-  padding: 0;
-  transition: all var(--transition-fast);
-  outline: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
 }
 
-.dot:hover {
-  background: rgba(255, 255, 255, 0.6);
+.flowNavItem:hover {
+  background: rgba(6, 17, 32, 0.75);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-4px);
 }
 
-.activeDot {
-  background: #ffffff;
-  transform: scale(1.25);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+.activeFlowNavItem {
+  background: rgba(6, 17, 32, 0.85);
+  border-color: var(--brand-blue);
+  box-shadow: 0 8px 30px rgba(6, 17, 32, 0.5), 0 0 0 1px rgba(30, 101, 179, 0.3);
+}
+
+.flowStepNum {
+  font-size: 32px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.15);
+  font-family: var(--font-sans);
+  transition: color 0.3s ease;
+  line-height: 1;
+}
+
+.activeFlowNavItem .flowStepNum {
+  color: #38bdf8;
+  text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+.flowStepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.flowStepLabel {
+  font-size: 9px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.flowStepTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.activeFlowNavItem .flowStepTitle {
+  color: #ffffff;
+}
+
+/* Progress indicator */
+.progressTrack {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.progressBar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--brand-blue) 0%, #38bdf8 100%);
+  transition: width 0.3s ease;
+}
+
+.activeFlowNavItem .progressBar {
+  width: 100%;
+  animation: fillProgress linear forwards;
+}
+
+@keyframes fillProgress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 /* Responsive Overrides */
+@media (max-width: 1200px) {
+  .flowNav {
+    padding: 0 40px;
+    gap: 12px;
+  }
+  .flowNavItem {
+    padding: 14px 18px;
+    gap: 12px;
+  }
+  .flowStepNum {
+    font-size: 26px;
+  }
+  .flowStepTitle {
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 992px) {
+  .hero {
+    height: 74vh;
+    min-height: 620px;
+    padding-bottom: 220px; /* Added more space for stacked flowNav */
+  }
+
   .slideContainer {
-    padding: 140px 40px 100px 40px;
+    padding: 120px 40px 220px 40px;
   }
   
   .title {
@@ -276,11 +383,22 @@
     font-size: 17px;
     max-width: 600px;
   }
+
+  .flowNav {
+    grid-template-columns: repeat(2, 1fr);
+    bottom: 28px;
+  }
 }
 
 @media (max-width: 768px) {
+  .hero {
+    height: 64vh;
+    min-height: 500px;
+    padding-bottom: 130px;
+  }
+
   .slideContainer {
-    padding: 120px 24px 80px 24px;
+    padding: 110px 24px 130px 24px;
   }
 
   .title {
@@ -297,7 +415,7 @@
 
   .btnGroup {
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 12px;
   }
 
@@ -309,6 +427,7 @@
   .sliderArrow {
     width: 44px;
     height: 44px;
+    display: none; /* Hide arrows on mobile to reduce clutter, relying on tabs */
   }
 
   .arrowIcon {
@@ -316,15 +435,25 @@
     height: 18px;
   }
 
-  .prevArrow {
-    left: 16px;
+  .flowNav {
+    padding: 0 24px;
+    grid-template-columns: repeat(4, 1fr); /* Back to 4 columns but minimal */
+    gap: 8px;
+    bottom: 20px;
   }
 
-  .nextArrow {
-    right: 16px;
+  .flowStepContent {
+    display: none; /* Hide labels/titles on mobile to save space */
   }
 
-  .sliderDots {
-    bottom: 24px;
+  .flowNavItem {
+    padding: 10px;
+    justify-content: center;
+    gap: 0;
+    border-radius: 8px;
+  }
+
+  .flowStepNum {
+    font-size: 18px;
   }
 }

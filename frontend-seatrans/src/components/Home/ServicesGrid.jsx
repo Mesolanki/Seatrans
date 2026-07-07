@@ -32,14 +32,14 @@ export default function ServicesGrid() {
   }, []);
 
   return (
-    <section 
-      ref={sectionRef} 
-      id="service" 
+    <section
+      ref={sectionRef}
+      id="service"
       className={`${styles.servicesSection} ${inView ? styles.animateIn : ""}`}
     >
       <div className={styles.container}>
         <div className={styles.layoutWrapper}>
-          
+
           {/* Left Column: Sticky Introduction */}
           <div className={styles.introCol}>
             <span className={styles.subtitle}>Our Services & Expertise</span>
@@ -65,7 +65,7 @@ export default function ServicesGrid() {
           {/* Right Column: Redesigned Capabilities Grid */}
           <div className={styles.gridCol}>
             <div className={styles.grid}>
-              
+
               {/* Card 1: Core Business */}
               <div className={styles.card}>
                 <div className={styles.cardHeader}>

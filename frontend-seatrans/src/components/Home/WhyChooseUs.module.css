@@ -1,0 +1,937 @@
+/* ═══════════════════════════════════════════════
+   WHY CHOOSE US — Seatrans Brand Theme
+   Uses Root Variables:
+   - --brand-navy: #0c2340
+   - --brand-navy-light: #163e6e
+   - --brand-navy-dark: #061120
+   - --brand-blue: #1e65b3
+   - --brand-blue-hover: #154e8c
+   - --brand-blue-light: #eaf1fa
+   ═══════════════════════════════════════════════ */
+
+.section {
+  position: relative;
+  padding: 110px 0;
+  background-color: var(--brand-navy-dark);
+  background-image: linear-gradient(
+      180deg,
+      rgba(6, 17, 32, 0.88) 0%,
+      rgba(12, 35, 64, 0.94) 100%
+    ),
+    url("/images/Hero_img/shipping_ocean_freight.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(30, 101, 179, 0.08) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 80px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── TOP ROW: TITLE & VIDEO ── */
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 64px;
+}
+
+.titleCol {
+  flex: 1;
+  max-width: 700px;
+}
+
+.badgeWrapper {
+  margin-bottom: 20px;
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--brand-blue);
+  border: 1.5px solid var(--brand-blue);
+  border-radius: 50px;
+  padding: 7px 22px;
+  text-transform: uppercase;
+}
+
+.heading {
+  font-family: var(--font-sans);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.accentText {
+  color: var(--brand-blue);
+}
+
+/* ── VIDEO CAPSULE (STADIUM IMAGE) ── */
+.videoCapsule {
+  position: relative;
+  width: 290px;
+  height: 120px;
+  border-radius: 60px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center right;
+  flex-shrink: 0;
+}
+
+.videoCapsule:hover {
+  transform: translateY(-4px) scale(1.03);
+  border-color: var(--brand-blue);
+  box-shadow: 0 16px 40px rgba(30, 101, 179, 0.2);
+}
+
+.videoThumbnailWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.videoThumbnail {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.videoCapsule:hover .videoThumbnail {
+  transform: scale(1.08);
+}
+
+/* ── PLAY BUTTON OVERLAY & RING PULSATION ── */
+.playButtonWrapper {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  z-index: 3;
+}
+
+.playIconContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--brand-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(30, 101, 179, 0.4);
+  transition: transform 0.3s ease, background 0.3s ease;
+  z-index: 5;
+}
+
+.videoCapsule:hover .playIconContainer {
+  transform: scale(1.1);
+  background: var(--brand-blue-hover);
+}
+
+.playIcon {
+  width: 20px;
+  height: 20px;
+  margin-left: 3px;
+}
+
+.pulseRing,
+.pulseRing2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(30, 101, 179, 0.5);
+  animation: pulseOuter 2.4s infinite ease-out;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pulseRing2 {
+  animation-delay: 1.2s;
+}
+
+@keyframes pulseOuter {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* ── CARDS GRID (Symmetrical 4 Columns) ── */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+}
+
+/* ── DIAGONAL CORNER CLIP-PATH CARDS ── */
+.card {
+  position: relative;
+  /* Outer card acts as 1.5px glass border */
+  background: rgba(255, 255, 255, 0.08);
+  clip-path: polygon(36px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 36px);
+  padding: 1.5px;
+  min-height: 310px;
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  outline: none;
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: rgba(12, 33, 58, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  /* Clip-path match with offset for inner container */
+  clip-path: polygon(35px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 35px);
+  padding: 40px 24px 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+/* PRO LEVEL GRADIENT ACCENT OVERLAY USING ::before */
+.cardInner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--brand-blue) 0%,
+    var(--brand-blue-hover) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+/* Active brand-blue card design */
+.activeCard {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 20px 48px rgba(30, 101, 179, 0.35),
+              0 0 30px rgba(30, 101, 179, 0.15);
+  transform: translateY(-8px);
+}
+
+.activeCard .cardInner::before {
+  opacity: 1;
+}
+
+.card:focus-visible {
+  box-shadow: 0 0 0 3px rgba(30, 101, 179, 0.4);
+}
+
+/* ── PRO LEVEL LIGHT SHINE SWEEP EFFECT ── */
+.cardInner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 40%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.1) 60%,
+    transparent 70%
+  );
+  transform: translateX(-110%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.card:hover .cardInner::after {
+  transform: translateX(110%);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 20px 48px rgba(30, 101, 179, 0.32),
+              0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+/* ── ICON HEXAGON (SPIN & SPRING) ── */
+.hexagonIconBox {
+  width: 68px;
+  height: 74px;
+  background: var(--brand-blue);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              background-color 0.4s ease, 
+              color 0.4s ease;
+  box-shadow: 0 4px 12px rgba(30, 101, 179, 0.15);
+  z-index: 4;
+}
+
+.hexagonIconBox svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* Active card icon changes to white background, brand blue icon with scale + complete 360 spin */
+.activeHexagon {
+  background: #ffffff !important;
+  color: var(--brand-blue) !important;
+  transform: scale(1.08) rotate(360deg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Inactive cards hexagon rotate animation on card hover */
+.card:not(.activeCard):hover .hexagonIconBox {
+  transform: rotateY(180deg) scale(1.05);
+}
+
+/* Active card hexagon spring scale-tilt on card hover */
+.activeCard:hover .hexagonIconBox {
+  transform: scale(1.12) rotate(365deg);
+}
+
+/* ── CONNECTOR ARROW (PRO LEVEL BOUNCING) ── */
+.connectorArrow {
+  width: 24px;
+  height: 28px;
+  margin: 6px 0 18px 0;
+  color: rgba(255, 255, 255, 0.18);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+
+.arrowSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.activeArrow {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Interactive hover bouncing animation for the arrow */
+.card:hover .connectorArrow,
+.activeCard .connectorArrow {
+  color: rgba(255, 255, 255, 0.8);
+  animation: bounceArrow 1.6s infinite alternate ease-in-out;
+}
+
+@keyframes bounceArrow {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(6px);
+  }
+}
+
+/* ── TYPOGRAPHY ── */
+.cardTitle {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  z-index: 4;
+  transition: transform 0.3s ease;
+}
+
+.cardDesc {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  font-weight: 400;
+  transition: color 0.3s ease, transform 0.3s ease;
+  z-index: 4;
+}
+
+.card:hover .cardTitle,
+.activeCard .cardTitle {
+  transform: translateY(-2px);
+}
+
+.card:hover .cardDesc,
+.activeCard .cardDesc {
+  transform: translateY(-2px);
+}
+
+.activeCard .cardDesc {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── VIDEO LIGHTBOX MODAL ── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 17, 32, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  padding: 24px;
+}
+
+.modalContent {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  background: #0c2340;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: scale(0.95);
+  animation: popScale 0.4s 0.05s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: all 0.25s ease;
+  z-index: 10;
+  border: 1px solid transparent;
+}
+
+.closeBtn:hover {
+  background: var(--brand-blue);
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.closeBtn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.iframeWrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.iframeWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popScale {
+  to { transform: scale(1); }
+}
+
+/* ── RESPONSIVE DESIGN ── */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 40px;
+  }
+  .cardsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 992px) {
+  .section {
+    padding: 80px 0;
+  }
+  .container {
+    padding: 0 32px;
+  }
+  .topRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    margin-bottom: 48px;
+  }
+  .heading {
+    font-size: clamp(26px, 5vw, 38px);
+    letter-spacing: -1px;
+  }
+  .videoCapsule {
+    width: 100%;
+    max-width: 360px;
+    height: 110px;
+    transform-origin: center left;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 0;
+  }
+  .container {
+    padding: 0 20px;
+  }
+  .topRow {
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  .badge {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 6px 18px;
+  }
+  .heading {
+    font-size: clamp(24px, 7vw, 34px);
+    letter-spacing: -0.8px;
+  }
+  .cardsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .card {
+    min-height: 260px;
+  }
+  .cardInner {
+    padding: 28px 18px 22px 18px;
+    clip-path: polygon(28px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 28px);
+  }
+  .card {
+    clip-path: polygon(29px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 29px);
+  }
+  .hexagonIconBox {
+    width: 58px;
+    height: 64px;
+  }
+  .hexagonIconBox svg {
+    width: 22px;
+    height: 22px;
+  }
+  .cardTitle {
+    font-size: 13.5px;
+  }
+  .cardDesc {
+    font-size: 12.5px;
+  }
+  .videoCapsule {
+    width: 100%;
+    max-width: 100%;
+    height: 100px;
+    border-radius: 50px;
+  }
+  .playButtonWrapper {
+    left: 20%;
+  }
+}
+
+/* ── 640px: Single Column ── */
+@media (max-width: 640px) {
+  .section {
+    padding: 56px 0;
+  }
+  .container {
+    padding: 0 16px;
+  }
+  .topRow {
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .card {
+    min-height: auto;
+    clip-path: polygon(26px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 26px);
+  }
+  .cardInner {
+    padding: 28px 20px 22px 20px;
+    clip-path: polygon(25px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 25px);
+  }
+  .videoCapsule {
+    width: 100%;
+    max-width: 100%;
+    height: 90px;
+  }
+  .playButtonWrapper {
+    left: 15%;
+  }
+}
+
+/* ── 480px: Large Mobile ── */
+@media (max-width: 480px) {
+  .section {
+    padding: 48px 0;
+  }
+  .container {
+    padding: 0 14px;
+  }
+  .badge {
+    font-size: 9.5px;
+    letter-spacing: 1.2px;
+    padding: 5px 16px;
+  }
+  .badgeWrapper {
+    margin-bottom: 14px;
+  }
+  .heading {
+    font-size: clamp(22px, 8vw, 28px);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+  .topRow {
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .videoCapsule {
+    height: 80px;
+    border-radius: 40px;
+  }
+  .playButtonWrapper {
+    width: 46px;
+    height: 46px;
+    left: 14%;
+  }
+  .playIcon {
+    width: 16px;
+    height: 16px;
+  }
+  .cardsGrid {
+    gap: 12px;
+  }
+  .card {
+    clip-path: polygon(22px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 22px);
+  }
+  .cardInner {
+    padding: 24px 16px 18px 16px;
+    clip-path: polygon(21px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 21px);
+  }
+  .hexagonIconBox {
+    width: 52px;
+    height: 58px;
+  }
+  .hexagonIconBox svg {
+    width: 20px;
+    height: 20px;
+  }
+  .connectorArrow {
+    width: 20px;
+    height: 22px;
+    margin: 4px 0 14px 0;
+  }
+  .cardTitle {
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    margin-bottom: 8px;
+  }
+  .cardDesc {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+}
+
+/* ── 425px: Standard Small Mobile ── */
+@media (max-width: 425px) {
+  .section {
+    padding: 44px 0;
+  }
+  .container {
+    padding: 0 12px;
+  }
+  .badge {
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 5px 14px;
+  }
+  .heading {
+    font-size: clamp(20px, 9vw, 25px);
+    letter-spacing: -0.3px;
+  }
+  .topRow {
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .videoCapsule {
+    height: 74px;
+    border-radius: 36px;
+  }
+  .playButtonWrapper {
+    width: 42px;
+    height: 42px;
+    left: 12%;
+  }
+  .playIcon {
+    width: 14px;
+    height: 14px;
+    margin-left: 2px;
+  }
+  .cardsGrid {
+    gap: 10px;
+  }
+  .card {
+    clip-path: polygon(20px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 20px);
+  }
+  .cardInner {
+    padding: 22px 14px 16px 14px;
+    clip-path: polygon(19px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 19px);
+  }
+  .hexagonIconBox {
+    width: 48px;
+    height: 52px;
+  }
+  .hexagonIconBox svg {
+    width: 18px;
+    height: 18px;
+  }
+  .connectorArrow {
+    width: 18px;
+    height: 20px;
+    margin: 4px 0 12px 0;
+  }
+  .cardTitle {
+    font-size: 12.5px;
+    letter-spacing: 0.2px;
+    margin-bottom: 7px;
+  }
+  .cardDesc {
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+  .closeBtn {
+    width: 38px;
+    height: 38px;
+  }
+  .closeBtn svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+/* ── 375px: iPhone SE / Small Android ── */
+@media (max-width: 375px) {
+  .section {
+    padding: 40px 0;
+  }
+  .container {
+    padding: 0 10px;
+  }
+  .badge {
+    font-size: 8.5px;
+    letter-spacing: 0.8px;
+    padding: 4px 12px;
+    margin-bottom: 10px;
+  }
+  .badgeWrapper {
+    margin-bottom: 10px;
+  }
+  .heading {
+    font-size: clamp(19px, 9.5vw, 22px);
+    letter-spacing: -0.2px;
+    line-height: 1.22;
+  }
+  .topRow {
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .videoCapsule {
+    height: 68px;
+    border-radius: 32px;
+  }
+  .playButtonWrapper {
+    width: 38px;
+    height: 38px;
+    left: 10%;
+  }
+  .playIcon {
+    width: 13px;
+    height: 13px;
+    margin-left: 2px;
+  }
+  .cardsGrid {
+    gap: 10px;
+  }
+  .card {
+    clip-path: polygon(18px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 18px);
+  }
+  .cardInner {
+    padding: 20px 12px 14px 12px;
+    clip-path: polygon(17px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 17px);
+  }
+  .hexagonIconBox {
+    width: 44px;
+    height: 48px;
+  }
+  .hexagonIconBox svg {
+    width: 16px;
+    height: 16px;
+  }
+  .connectorArrow {
+    width: 16px;
+    height: 18px;
+    margin: 3px 0 10px 0;
+  }
+  .cardTitle {
+    font-size: 12px;
+    letter-spacing: 0.15px;
+    margin-bottom: 6px;
+  }
+  .cardDesc {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+}
+
+/* ── 320px: Galaxy S5 / Tiny Screens ── */
+@media (max-width: 320px) {
+  .section {
+    padding: 36px 0;
+  }
+  .container {
+    padding: 0 8px;
+  }
+  .badge {
+    font-size: 8px;
+    letter-spacing: 0.6px;
+    padding: 4px 10px;
+  }
+  .badgeWrapper {
+    margin-bottom: 8px;
+  }
+  .heading {
+    font-size: 18px;
+    letter-spacing: -0.1px;
+    line-height: 1.25;
+  }
+  .topRow {
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .videoCapsule {
+    height: 60px;
+    border-radius: 28px;
+    border-width: 1.5px;
+  }
+  .playButtonWrapper {
+    width: 34px;
+    height: 34px;
+    left: 8%;
+  }
+  .playIcon {
+    width: 11px;
+    height: 11px;
+    margin-left: 1px;
+  }
+  .cardsGrid {
+    gap: 8px;
+  }
+  .card {
+    clip-path: polygon(16px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 16px);
+  }
+  .cardInner {
+    padding: 18px 10px 12px 10px;
+    clip-path: polygon(15px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 15px);
+  }
+  .hexagonIconBox {
+    width: 40px;
+    height: 44px;
+  }
+  .hexagonIconBox svg {
+    width: 14px;
+    height: 14px;
+  }
+  .connectorArrow {
+    width: 14px;
+    height: 16px;
+    margin: 2px 0 8px 0;
+  }
+  .cardTitle {
+    font-size: 11px;
+    letter-spacing: 0.1px;
+    margin-bottom: 5px;
+  }
+  .cardDesc {
+    font-size: 10.5px;
+    line-height: 1.48;
+  }
+  .closeBtn {
+    width: 34px;
+    height: 34px;
+    top: 10px;
+    right: 10px;
+  }
+  .closeBtn svg {
+    width: 14px;
+    height: 14px;
+  }
+  .modalOverlay {
+    padding: 12px;
+  }
+  .modalContent {
+    border-radius: 16px;
+  }
+}
