@@ -56,7 +56,7 @@ export default function Navbar() {
             <Link href="/" className={styles.navLink} onClick={handleLinkClick}>
               Home
             </Link>
-            <Link href="#about" className={styles.navLink} onClick={handleLinkClick}>
+            <Link href="/about" className={styles.navLink} onClick={handleLinkClick}>
               About Us
             </Link>
             <Link href="#service" className={styles.navLink} onClick={handleLinkClick}>
@@ -121,7 +121,7 @@ export default function Navbar() {
             Home
           </Link>
           <div className={styles.mobileDividerLine} />
-          <Link href="#about" className={styles.mobileNavLink} onClick={handleLinkClick}>
+          <Link href="/about" className={styles.mobileNavLink} onClick={handleLinkClick}>
             About Us
           </Link>
           <div className={styles.mobileDividerLine} />

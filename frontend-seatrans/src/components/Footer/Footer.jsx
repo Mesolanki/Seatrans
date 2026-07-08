@@ -13,29 +13,6 @@ export default function Footer() {
       <div className={styles.glowPill} />
 
       <div className={styles.container}>
-        {/* UPPER CALL TO ACTION SECTION */}
-        <div className={styles.ctaBanner}>
-          <div className={styles.ctaContent}>
-            <span className={styles.ctaSubtitle}>TAILORED LOGISTICS GATEWAY</span>
-            <h2 className={styles.ctaTitle}>Ready to Streamline Your Global Shipments?</h2>
-            <p className={styles.ctaDesc}>
-              Get a customized rate card and custom corridor clearing quotes in less than 4 hours from our operations desk.
-            </p>
-          </div>
-          <div className={styles.ctaActions}>
-            <a href="#quote" className={styles.primaryBtn}>
-              <span>Get Free Quote</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={styles.btnIcon}>
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </a>
-            <a href="#service" className={styles.secondaryBtn}>
-              <span>Explore Services</span>
-            </a>
-          </div>
-        </div>
-
         {/* MIDDLE SECTION: 4 COLUMNS */}
         <div className={styles.grid}>
           {/* Column 1: Brand Info */}
@@ -81,7 +58,7 @@ export default function Footer() {
             <h3 className={styles.colTitle}>Navigation</h3>
             <ul className={styles.linkList}>
               <li>
-                <a href="#about" className={styles.footerLink}>About Company</a>
+                <Link href="/about" className={styles.footerLink}>About Company</Link>
               </li>
               <li>
                 <a href="#service" className={styles.footerLink}>Services Desk</a>
